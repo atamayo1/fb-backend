@@ -1,0 +1,33 @@
+{
+  "name": "fb-backend",
+  "version": "1.0.0",
+  "description": "Backend like facebook",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev/anthony": "nodemon index.js -f *.graphql"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atamayo1/fb-backend.git"
+  },
+  "keywords": [
+    "graphql"
+  ],
+  "author": "Anthony Tamayo Ortega",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atamayo1/fb-backend/issues"
+  },
+  "homepage": "https://github.com/atamayo1/fb-backend#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^6.7.0",
+    "graphql": "^14.5.8",
+    "graphql-yoga": "^1.18.3",
+    "mongoose": "^5.7.12"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
