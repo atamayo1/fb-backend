@@ -1,43 +1,96 @@
+scalar URL
+scalar EmailAddress
+scalar Upload
+directive @auth on FIELD_DEFINITION | FIELD
+
 type Query{
     getUsers:[User]!
     getSingleUser(id:ID):User!
+    getPosts:[Post]!
+    getSinglePost(id:ID): Post!
+    me: User!@auth
 }
 type Mutation{
     createNewUser(data:UserInput!):User!
     updateOneUser(id:ID!, data: UserInputUpdate!):User!
     deleteOneUser(id:ID!):String!
+    createNewPost(data:PostInput!):Post!@auth
+    updateOnePost(id:ID!, data:PostInputUpdate!):Post!@auth
+    deleteOnePost(id:ID!):String!@auth
+    login(email: EmailAddress!, password: String!): Auth!
 }
 type User{
     _id: ID!
-    name: String!
-    lastname: String!
+    first_name: String!
+    last_name: String!
     username: String!
     email: String!
     password: String!
     code: String!
+    birth_date:String!
+    posts:[Post]!
+    gender: GENDERS
     is_active: Boolean!
     is_admin: Boolean!
     created_at: String!
 }
+type Auth{
+    token: String!
+    message: String!
+}
 input UserInput{
-    name: String!
-    lastname: String!
+    first_name: String!
+    last_name: String!
     username: String!
     email: String!
     password: String!
     code: String
+    birth_date:String
+    gender: GENDERS
     is_active: Boolean
     is_admin: Boolean
     created_at: String
 }
 input UserInputUpdate{
-    name: String
-    lastname: String
+    first_name: String
+    last_name: String
     username: String
     email: String
     password: String
     code: String
+    birth_date:String
+    gender: GENDERS
     is_active: Boolean
     is_admin: Boolean
     created_at: String
+}
+type Post{
+    _id:ID!
+    title: String!
+    content:String!
+    user: User!
+    cover: URL!
+    liked_by: [User]
+    is_active: Boolean
+}
+input PostInput{
+    title: String!
+    content:String!
+    user: ID
+    cover: Upload
+    is_active: Boolean
+}
+
+input PostInputUpdate{
+    title: String
+    content:String
+    cover: Upload
+    liked_by: String
+    is_active: Boolean
+}
+
+enum GENDERS{
+    M
+    F
+    O
 }
