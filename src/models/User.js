@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-    name:{
+    first_name:{
         type: String,
         required: true,
     },
-    lastname: {
+    last_name: {
         type: String,
         required: true,
     },
@@ -27,6 +28,17 @@ const UserSchema = new Schema({
     code: {
         type: String
     },
+    birth_date:{
+        type: Date,
+    },
+    gender:{
+        type: String,
+        enum: ['M','F','O'],
+    },
+    posts:{
+        type: [Schema.Types.ObjectId],
+        ref: 'posts'
+    },
     is_active: {
         type: Boolean
     },
@@ -36,6 +48,22 @@ const UserSchema = new Schema({
     created_at: {
         type: String
     }
+}, {
+    timestamps:true,
+});
+
+UserSchema.pre('save', function (next) {
+    const user = this;
+    const SALT_FACTOR = 10;
+    if(!user.isModified('password')) { return next(); }
+    bcrypt.genSalt(SALT_FACTOR, function (err, salt) {
+        if(err) return next(err);
+        bcrypt.hash(user.password, salt, function (error, hash) {
+            if(error) return next(error);
+            user.password = hash;
+            next();
+        });
+    })
 });
 
 module.exports = mongoose.model('user', UserSchema);
