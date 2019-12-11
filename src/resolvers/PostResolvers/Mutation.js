@@ -2,8 +2,8 @@ const { createPost, updatePost, deletePost } = require('../../services/PostServi
 const { getOneUser } = require('../../services/UserService');
 const storage = require('../../utils/storage');
 
-const createNewPost = async (_, {data}, {user}) => {
-    data.userpost = user._id;
+const createNewPost = async (_, {data}, {userAuth}) => {
+    data.user = userAuth._id;
     if (data.cover) {
         const { createReadStream } = await data.cover;
         const stream = createReadStream();
@@ -15,13 +15,13 @@ const createNewPost = async (_, {data}, {user}) => {
         };
     }
     const post = await createPost(data);
-    const userpost = await getOneUser((data.userpost));
-    userpost.posts.push(post);
-    userpost.save();
+    const user = await getOneUser((data.userAuth));
+    user.posts.push(post);
+    user.save();
     return post;
 };
-const updateOnePost = async (_,{id,data}, {user}) => {
-    data.userpost = user._id;
+const updateOnePost = async (_,{id,data}, {userAuth}) => {
+    data.user = userAuth._id;
     if (data.cover) {
         const {
             createReadStream

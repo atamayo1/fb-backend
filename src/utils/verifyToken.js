@@ -9,9 +9,9 @@ const verifyToken = async req => {
             const formatedToken = Authorization.replace('JWT ', '');
             const payload = jwt.verify(formatedToken, process.env.SECRET_KEY);
             if(!payload) return req;
-            const user = getUserByEmail(payload.email);
-            if(!user) return req;
-            return user;
+            const userAuth = getUserByEmail(payload.email);
+            if(!userAuth) return req;
+            return userAuth;
         } else {
             return {};
         }
