@@ -71,6 +71,7 @@ type Post{
     title: String!
     content:String!
     user: User!
+    comment: [Comment]!
     cover: URL!
     liked_by: [User]
     is_active: Boolean
@@ -97,12 +98,12 @@ type Comment {
     user: User!
 }
 
-input CommentInput {
+input CommentInput{
     content: String
     post: ID!
 }
 
-input CommentInputUpdate {
+input CommentInputUpdate{
     content: String!
 }
 
