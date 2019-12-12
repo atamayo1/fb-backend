@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "set NODE_ENV=test && jest --detectOpenHandles",
-    "fb/comentarios": "nodemon index.js -f *.graphql"
+    "dev/anthony": "nodemon index.js -f *.graphql"
   },
   "repository": {
     "type": "git",
