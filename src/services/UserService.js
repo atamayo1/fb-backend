@@ -29,7 +29,7 @@ const updateUser = (id, data) => Users.findByIdAndUpdate({
 
 const getUserByEmail = (email) => Users.findOne({
     email,
-    is_active: true
+    is_active: true,
 }).populate('posts');
 
 module.exports = {

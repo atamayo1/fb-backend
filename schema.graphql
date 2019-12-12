@@ -8,6 +8,7 @@ type Query{
     getSingleUser(id:ID):User!
     getPosts:[Post]!
     getSinglePost(id:ID): Post!
+    getComments: [Comment]!
     me: User!@auth
 }
 type Mutation{
@@ -17,6 +18,7 @@ type Mutation{
     createNewPost(data:PostInput!):Post!@auth
     updateOnePost(id:ID!, data:PostInputUpdate!):Post!@auth
     deleteOnePost(id:ID!):String!@auth
+    createNewComment(data:CommentInput!):Comment!@auth
     login(email: EmailAddress!, password: String!): Auth!
 }
 type User{
@@ -87,6 +89,21 @@ input PostInputUpdate{
     cover: Upload
     liked_by: String
     is_active: Boolean
+}
+type Comment {
+    _id: ID!
+    content: String!
+    post: Post!
+    user: User!
+}
+
+input CommentInput {
+    content: String
+    post: ID!
+}
+
+input CommentInputUpdate {
+    content: String!
 }
 
 enum GENDERS{
