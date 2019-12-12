@@ -11,7 +11,7 @@ const authenticate = ({ email, password }) =>{
                 isValid ? resolve(createToken(userAuth))
                     : reject(new Error('Incorrect Password'));
             });
-        });
+        }).catch(error => console.log(error));
     });
 };
 

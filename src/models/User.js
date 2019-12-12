@@ -40,7 +40,8 @@ const UserSchema = new Schema({
         ref: 'posts'
     },
     is_active: {
-        type: Boolean
+        type: Boolean,
+        default: true
     },
     is_admin: {
       type: Boolean
