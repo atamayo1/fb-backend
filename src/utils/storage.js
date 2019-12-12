@@ -7,7 +7,7 @@ const storage = ({ stream }) => {
         api_secret: process.env.CLOUDINARY_API_SECRET,
     });
     return new Promise((resolve, reject) => {
-        const buffer = cloudinary.v2.uploader_stream((err, result) => {
+        const buffer = cloudinary.v2.uploader.upload_stream((err, result) => {
             if(err) reject(err);
             resolve(result);
         });
