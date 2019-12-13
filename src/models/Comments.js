@@ -13,7 +13,7 @@ const CommentSchema = new Schema({
     },
     post: {
         type: Schema.Types.ObjectId,
-        ref: 'post'
+        ref: 'posts'
     },
     is_active: {
         type: Boolean,

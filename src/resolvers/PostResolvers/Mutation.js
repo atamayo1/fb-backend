@@ -15,9 +15,9 @@ const createNewPost = async (_, {data}, {userAuth}) => {
         };
     }
     const post = await createPost(data);
-    const user = await getOneUser((data.userAuth));
-    user.posts.push(post);
-    user.save();
+    //const user = await getOneUser((data.userAuth));
+    userAuth.posts.push(post);
+    userAuth.save();
     return post;
 };
 const updateOnePost = async (_,{id,data}, {userAuth}) => {

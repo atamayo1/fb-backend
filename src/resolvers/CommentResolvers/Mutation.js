@@ -10,8 +10,8 @@ const createNewComment = async (_, { data }, { userAuth }) => {
     const post = await getOnePost(data.post);
     post.comments.push(comment._id);
     post.save();
-    userAuth.comments.push(comment._id);
-    userAuth.save();
+    /* userAuth.comments.push(comment._id);
+     userAuth.save();*/
     return comment;
 };
 
