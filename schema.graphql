@@ -19,6 +19,7 @@ type Mutation{
     updateOnePost(id:ID!, data:PostInputUpdate!):Post!@auth
     deleteOnePost(id:ID!):String!@auth
     createNewComment(data:CommentInput!):Comment!@auth
+    #likedPost(id:ID!):Post!@auth
     login(email: EmailAddress!, password: String!): Auth!
 }
 type User{
@@ -73,6 +74,7 @@ type Post{
     user: User!
     comment: [Comment]!
     cover: URL!
+    likes: Int
     liked_by: [User]
     is_active: Boolean
 }
@@ -88,7 +90,8 @@ input PostInputUpdate{
     title: String
     content:String
     cover: Upload
-    liked_by: String
+    likes: Int
+    liked_by: ID
     is_active: Boolean
 }
 type Comment {

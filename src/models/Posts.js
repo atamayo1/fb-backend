@@ -24,6 +24,7 @@ const PostSchema = new Schema({
     },
     likes:{
         type: Number,
+        default: 0
     },
     liked_by:{
         type: [Schema.Types.ObjectId],
