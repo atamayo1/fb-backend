@@ -1,5 +1,6 @@
 const UserResolver = require('./UserResolvers');
 const PostResolver = require('./PostResolvers');
+const CommentResolver = require('./CommentResolvers');
 const { EmailAddressResolver, URLResolver } = require('graphql-scalars');
 
 module.exports = {
@@ -7,10 +8,12 @@ module.exports = {
     EmailAddress: EmailAddressResolver,
     Query:{
         ...UserResolver.Query,
-        ...PostResolver.Query
+        ...PostResolver.Query,
+        ...CommentResolver.Query
     },
     Mutation: {
         ...UserResolver.Mutation,
-        ...PostResolver.Mutation
+        ...PostResolver.Mutation,
+        ...CommentResolver.Mutation
     }
 };

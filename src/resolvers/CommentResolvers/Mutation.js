@@ -1,16 +1,17 @@
 const { createComment } = require('../../services/CommentService');
 const { getOnePost } = require('../../services/PostService');
 
-const createNewComment = async (_, { data }, { post }) => {
-    data.post = post._id;
+const createNewComment = async (_, { data }, { userAuth }) => {
     const dataComplete = {
         ...data,
-        post: post._id
+        user: userAuth._id
     };
     const comment = await createComment(dataComplete);
-   // const post = await getOnePost(data.post);
-    post.comme.push(comment._id);
+    const post = await getOnePost(data.post);
+    post.comments.push(comment._id);
     post.save();
+    /* userAuth.comments.push(comment._id);
+     userAuth.save();*/
     return comment;
 };
 
