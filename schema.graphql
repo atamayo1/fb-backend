@@ -71,7 +71,7 @@ type Post{
     _id:ID!
     title: String!
     content:String!
-    user: User!
+    user: User
     comment: [Comment]!
     cover: URL!
     likes: Int
@@ -97,8 +97,8 @@ input PostInputUpdate{
 type Comment {
     _id: ID!
     content: String!
-    post: Post!
-    user: User!
+    post: Post
+    user: User
 }
 
 input CommentInput{
